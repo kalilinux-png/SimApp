@@ -2,6 +2,7 @@ import pygame
 import time
 import requests as req
 import random
+from menu import order_section
 from pygame.locals import *
 import os
 
@@ -71,7 +72,6 @@ class dashboard():
                     print('key down from 71')
                     if event.key == K_SPACE:
                         print('space pressed on live pnl')
-                        from menu import order_section
                         order_section()
             pandl=req.get('https://d7k2d7.deta.dev/pnl').text
             print('got pnl',pandl)
