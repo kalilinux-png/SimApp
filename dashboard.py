@@ -33,13 +33,19 @@ class dashboard():
         s2.fill(self.color_bg)
         row=0
         last_order=int(req.get('https://d7k2d7.deta.dev/len').text)+1
-        print(last_order)
+        print('len of orders',last_order)
         for k in range(1,last_order):
             print('inside for loop')
         # for k in range(1,100):
             for event in pygame.event.get():
                 if event.type == QUIT:
+                    print('quit form 42')
                     pygame.quit()
+                elif event.type == pygame.KEYDOWN:
+                    print('RANDOM KEY PRESSED')
+                    if event.key == pygame.K_SPACE:
+                        print('f1 pressed')
+                        order_section()
             scrip_pnl=req.get(f'https://d7k2d7.deta.dev/script/pnl/{k}').text
             # scrip_pnl=k
             print(k,'scrip_pnl',scrip_pnl)
@@ -61,6 +67,12 @@ class dashboard():
             for event in pygame.event.get():
                 if event.type == QUIT:
                     pygame.quit()
+                if event.type == pygame.KEYDOWN:
+                    print('key down from 71')
+                    if event.key == K_SPACE:
+                        print('space pressed on live pnl')
+                        from menu import order_section
+                        order_section()
             pandl=req.get('https://d7k2d7.deta.dev/pnl').text
             print('got pnl',pandl)
             text=self.font.render(f"LIVE PNL "+str(pandl),True,(0,255,0))
@@ -81,9 +93,10 @@ class dashboard():
 
 if __name__=='__main__':
     d=dashboard()
-    print('done dashboard')
+   
     # d.pnl_script()
     d.live_pnl()
+    print('done live pnl')
 
     
 
