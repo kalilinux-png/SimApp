@@ -37,6 +37,7 @@ class Model():
 
 def order_section():
     root = Tk()
+    root.title("Place Order")
     root.title = 'Orders'
     m = Model(root, 'Place Order')
     exch = m.label(text='Exchange =>', row=1, column=0)
@@ -64,18 +65,35 @@ def order_section():
         print(url)
         response=req.post(url).text
         messagebox.showinfo(title='Order Report',message=response)
-    def pnl():
-        os.system('python dashboard.py')
-        # from dashboard import dashboard
-        # d=dashboard()
-        # d.live_pnl()
-        
 
     but = m.button(text='Place Order',row=7, command=lambda: sender())
-    but = m.button(text='Profit and loss',row=7,column=1, command=lambda:pnl())
     m.active()
+def watchlist():
+    root = Tk()
+    root.title = 'Watchlist'
+    m = Model(root, '')
+    exch = m.label(text='Exchange =>', row=1, column=0)
+    exch_ent = m.Ent(text='ent', row=1, column=1)  # ent for exch
+
+    exch_segment = m.label(text='Exchange Segment =>', row=2, column=0)
+    exch_segment_ent = m.Ent(text='ent', row=2, column=1)  # ent for segment
+
+    token = m.label(text='token =>', row=3, column=0)
+    token_ent = m.Ent(text='ent', row=3, column=1)  # ent for token
+
+    def sender():
+        entries = [exch_ent.get(), exch_segment_ent.get(
+        ), token_ent.get()]
+        url = "https://d7k2d7.deta.dev/watchlist/add/"+'/'.join(entries)
+        print(url)
+        response=req.post(url).text
+        messagebox.showinfo(title='Order Report',message=response)
+
+    but = m.button(text='Add to watchlist',row=7, command=lambda: sender())
+    m.active()
+
 
 
 if __name__ == '__main__':
     import time
-    order_section()
+    watchlist()
