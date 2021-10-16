@@ -68,6 +68,8 @@ def order_section():
 
     but = m.button(text='Place Order',row=7, command=lambda: sender())
     m.active()
+
+    
 def watchlist():
     root = Tk()
     root.title = 'Watchlist'
