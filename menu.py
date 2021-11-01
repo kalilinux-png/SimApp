@@ -94,8 +94,44 @@ def watchlist():
     but = m.button(text='Add to watchlist',row=7, command=lambda: sender())
     m.active()
 
+def option_menu():
+    root = Tk()
+    root.title("Option Menu")
+    m = Model(root, 'Place Order')
+
+    exch = m.label(text='Exchange =>', row=1, column=0)
+    exch_ent = m.Ent(text='ent', row=1, column=1)  # ent for exch
+
+    exch_segment = m.label(text='Exchange Segment =>', row=2, column=0)
+    exch_segment_ent = m.Ent(text='ent', row=2, column=1)  # ent for segment
+
+    token = m.label(text='Symbol =>', row=3, column=0)
+    token_ent = m.Ent(text='ent', row=3, column=1)  # ent for token
+
+    # quantity = m.label(text='Quantity =>', row=5, column=0)
+    # quantity_ent = m.Ent(text='ent', row=5, column=1)  # ent for token
+
+    Buy = m.label(text='Buy At ltp >= =>', row=4, column=0)
+    Buy_ent = m.Ent(text='ent', row=4, column=1)  # ent for action
+
+    Sell = m.label(text='Sell At ltp <= =>', row=5, column=0)
+    Sell_ent = m.Ent(text='ent', row=5, column=1)  # ent for action
+
+    # price = m.label(text='Price=>', row=6, column=0)
+    # price_ent = m.Ent(text='ent', row=6, column=1)  # ent for action
+    def sender():
+        entries = [exch_ent.get(), exch_segment_ent.get(
+        ), token_ent.get(),Buy_ent.get(),Sell_ent.get()]
+        url = "http://127.0.0.1:8000/option/"+'/'.join(entries)
+        print(url)
+        response=req.get(url).text
+        messagebox.showinfo(title='Order Report',message=response)
+
+    but = m.button(text='Start ',row=7, command=lambda: sender())
+
+    m.active()
 
 
 if __name__ == '__main__':
     import time
-    watchlist()
+    option_menu()

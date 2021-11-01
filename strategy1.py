@@ -1,6 +1,5 @@
 import requests as req
 from menu import Model
-from strategy_back import get_hl
 from tkinter import messagebox
 import os 
 from tkinter import *

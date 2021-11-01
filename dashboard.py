@@ -1,6 +1,7 @@
 import pygame
 from menu import watchlist
 from tkinter import *
+import threading
 import time
 from pygame.version import ver
 import requests as req
@@ -8,6 +9,7 @@ import random
 from menu import order_section
 from strategy1 import taker
 from pygame.locals import *
+from menu import option_menu
 import os
 
 
@@ -59,7 +61,9 @@ class dashboard():
                 if event.key == pygame.K_w:
                     print('watchlist button')
                     watchlist()
-                    self.watchlist()
+                if event.key == pygame.K_o:
+                    print('option menu')
+                    option_menu()
     def pnl_script(self):
         print('inside pnl script')
         s2 = pygame.Surface((400, 900))
@@ -81,7 +85,7 @@ class dashboard():
             self.screen.blit(s2, [0, 0])
             self.flip()
             row += 17
-        self.watchlist()
+
 
     def live_pnl(self):
         live_pnl_scrn = pygame.Surface((300, 50))
@@ -98,7 +102,7 @@ class dashboard():
             self.screen.blit(live_pnl_scrn, [500, 0])
             self.flip()
             live_pnl_scrn.fill(self.color_bg)
-            # pandl+=1
+            # pandl+=1            
             self.pnl_script()
 
     def flip(self):
@@ -107,62 +111,10 @@ class dashboard():
 
 if __name__ == '__main__':
     d = dashboard()
+    d.live_pnl()
+
 
     # d.pnl_script()
-    d.live_pnl()
-    print('done live pnl')
+    # d.live_pnl()
+    # print('done live pnl')
 
-
-# class dashboard():
-#     pygame.init()
-#     screen = pygame.display.set_mode((500, 500))
-#     pygame.display.set_caption('Profit and Loss')
-#     font = pygame.font.Font(None, 50)
-#     screen.fill((80, 80, 80))
-#     watchlist=pygame.draw.rect(screen,(255,255,255),(0,0,400,600))
-# # add_button=pygame.draw.rect(screen,(255,255,255))
-# def take():
-#     return  player_name.get()
-
-# def watchlist():
-#     player_name.pack(pady=30)
-#     Button(
-#         root,
-#         text="Add to Watchlist",
-#         padx=10,
-#         command=take,
-#         pady=5,
-
-#         ).pack()
-
-#     root.mainloop()
-
-
-# def add_to_watch():
-#     while True:
-#         for k in pygame.event.get():
-#             if k.type==QUIT:
-#                 print('quit')
-#                 pygame.quit()
-#             if k.type==KEYDOWN:
-#                 if k.key==pygame.K_BACKSPACE:
-#                     print('backspace')
-#                 if k.key == pygame.K_a:
-#                     print('a is pressed')
-#                     watchlist()
-
-
-# def add_text(text='Hello world', loc=[150, 150], color=(255, 255, 255), screen=screen):
-#     text = str(text)
-#     text = font.render(text, True, color)
-#     screen.blit(text, loc)
-#     pygame.display.flip()
-#     print('flip')
-
-
-# if __name__ == '__main__':
-#     add_to_watch()
-#     # add_text()
-#     # add_text('watchlist',loc=[0,0],color=(150,200,150))
-#     # time.sleep(2)
-#     # pygame.quit()
